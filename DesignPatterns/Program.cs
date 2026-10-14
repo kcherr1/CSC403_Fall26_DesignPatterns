@@ -1,9 +1,11 @@
-﻿namespace DesignPatterns {
-  internal class Program {
-    static void Main(string[] args) {
-      Singleton s = Singleton.GetInstance();
-      Singleton s2 = Singleton.GetInstance();
-      Console.WriteLine(s == s2);
-    }
+﻿namespace DesignPatterns;
+
+internal class Program {
+  static void Main(string[] args) {
+    Pizza pizza = new CheesePizza();
+    pizza = new Peppers(pizza);
+    pizza = new Pineapple(pizza);
+
+    pizza.Show();
   }
 }
