@@ -8,8 +8,9 @@ namespace DesignPatterns;
 
 // Singleton
 public class Singleton {
+  private static object lockObj = new object();
   // Lazy initialization
-  private static Singleton instance = null;
+  private volatile static Singleton instance = null;
   public int number1;
   public int number2;
   public int number3;
@@ -21,10 +22,17 @@ public class Singleton {
   }
   
   public static Singleton GetInstance() {
-    if (instance == null) {
-      instance = new();
+    if (instance == null) { // efficiency
+      lock (lockObj) {
+        if (instance == null) { // accuracy
+          instance = new();
+        }
+      }
     }
     return instance;
+    // t3
+    // t2
+    // t1
   }
 }
 
